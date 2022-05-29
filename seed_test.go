@@ -10,18 +10,11 @@ import (
 )
 
 func getSeeds(amountDesired int) (output [][]string) {
-	file, err := os.Open("seeds.csv")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer func(file *os.File) {
-		err := file.Close()
+	for i := 0; i < amountDesired; {
+		file, err := os.Open("seeds.csv")
 		if err != nil {
 			log.Fatal(err)
 		}
-	}(file)
-
-	for i := 0; i < amountDesired; {
 		reader := csv.NewReader(file)
 
 		for ; i < amountDesired || err == io.EOF; i++ {
@@ -34,6 +27,10 @@ func getSeeds(amountDesired int) (output [][]string) {
 				log.Fatal(err)
 			}
 			output = append(output, entry)
+		}
+		err = file.Close()
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 	return
@@ -68,7 +65,7 @@ func Test_createAvailableSeeds(testFramework *testing.T) {
 		{
 			name: "Given 20 entries",
 			args: args{
-				data: getSeeds(50),
+				data: getSeeds(20),
 			},
 			want: []Seed{
 				{"Western Fodlan Seeds", 1, 9},
@@ -90,7 +87,7 @@ func Test_createAvailableSeeds(testFramework *testing.T) {
 				{"Yellow Flower Seeds", 3, 55},
 				{"Nordsalat Seeds", 4, 3},
 				{"Morfis-Plum Seeds", 4, 18},
-				{"Boa-Fruit Seeds", 5, 3},
+				{"Boa-Fruit Seeds", 5, 31},
 			},
 		},
 	}
@@ -100,7 +97,7 @@ func Test_createAvailableSeeds(testFramework *testing.T) {
 			if err != nil {
 				test.Errorf("An error occured: %v ", err)
 			} else if !reflect.DeepEqual(got, testCase.want) {
-				test.Errorf("createAvailableSeeds() = %v, want %v", got, testCase.want)
+				test.Errorf("\n createAvailableSeeds() = %v\n want %v", got, testCase.want)
 			}
 		})
 	}
