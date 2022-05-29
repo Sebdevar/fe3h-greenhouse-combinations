@@ -9,7 +9,7 @@ import (
 
 func GetSeeds(amountDesired int) (output [][]string) {
 	for i := 0; i < amountDesired; {
-		file, err := os.Open("seeds.csv")
+		file, err := os.Open("../seeds.csv")
 		if err != nil {
 			log.Fatal(err)
 		}
