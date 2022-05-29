@@ -1,42 +1,11 @@
 package FE3H_greenhouse_combinations
 
 import (
-	"encoding/csv"
-	"io"
-	"log"
-	"os"
 	"reflect"
 	"testing"
 )
 
-func getSeeds(amountDesired int) (output [][]string) {
-	for i := 0; i < amountDesired; {
-		file, err := os.Open("seeds.csv")
-		if err != nil {
-			log.Fatal(err)
-		}
-		reader := csv.NewReader(file)
-
-		for ; i < amountDesired || err == io.EOF; i++ {
-
-			entry, err := reader.Read()
-			if err == io.EOF {
-				break
-			}
-			if err != nil {
-				log.Fatal(err)
-			}
-			output = append(output, entry)
-		}
-		err = file.Close()
-		if err != nil {
-			log.Fatal(err)
-		}
-	}
-	return
-}
-
-func Test_createAvailableSeeds(testFramework *testing.T) {
+func Test_CreateAvailableSeeds(testFramework *testing.T) {
 	type args struct {
 		data [][]string
 	}
@@ -56,7 +25,7 @@ func Test_createAvailableSeeds(testFramework *testing.T) {
 		{
 			name: "Given a single entry",
 			args: args{
-				data: getSeeds(1),
+				data: GetSeeds(1),
 			},
 			want: []Seed{
 				{name: "Western Fodlan Seeds", grade: 1, rank: 9},
@@ -65,7 +34,7 @@ func Test_createAvailableSeeds(testFramework *testing.T) {
 		{
 			name: "Given 20 entries",
 			args: args{
-				data: getSeeds(20),
+				data: GetSeeds(20),
 			},
 			want: []Seed{
 				{"Western Fodlan Seeds", 1, 9},
@@ -93,11 +62,11 @@ func Test_createAvailableSeeds(testFramework *testing.T) {
 	}
 	for _, testCase := range tests {
 		testFramework.Run(testCase.name, func(test *testing.T) {
-			got, err := createAvailableSeeds(testCase.args.data)
+			got, err := CreateAvailableSeeds(testCase.args.data)
 			if err != nil {
 				test.Errorf("An error occured: %v ", err)
 			} else if !reflect.DeepEqual(got, testCase.want) {
-				test.Errorf("\n createAvailableSeeds() = %v\n want %v", got, testCase.want)
+				test.Errorf("\n CreateAvailableSeeds() = %v\n want %v", got, testCase.want)
 			}
 		})
 	}

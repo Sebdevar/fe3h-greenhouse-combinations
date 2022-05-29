@@ -11,7 +11,7 @@ type Seed struct {
 	rank  int64
 }
 
-func createAvailableSeeds(data [][]string) (availableSeeds []Seed, err error) {
+func CreateAvailableSeeds(data [][]string) (availableSeeds []Seed, err error) {
 	availableSeeds = make([]Seed, 0)
 	for _, entry := range data {
 		if len(entry) != 3 {
