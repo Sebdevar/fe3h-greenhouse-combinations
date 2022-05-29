@@ -1,4 +1,4 @@
-package FE3H_greehouse_combinations
+package FE3H_greenhouse_combinations
 
 import (
 	"encoding/csv"
