@@ -1,4 +1,4 @@
-package FE3H_greenhouse_combinations
+package fe3h_greenhouse_combinations
 
 import (
 	"encoding/csv"
@@ -9,7 +9,7 @@ import (
 
 func GetSeeds(amountDesired int) (output [][]string) {
 	for i := 0; i < amountDesired; {
-		file, err := os.Open("../seeds.csv")
+		file, err := os.Open("seeds.csv")
 		if err != nil {
 			log.Fatal(err)
 		}

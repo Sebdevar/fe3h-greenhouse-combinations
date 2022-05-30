@@ -1,4 +1,4 @@
-package FE3H_greenhouse_combinations
+package fe3h_greenhouse_combinations
 
 import (
 	"reflect"
@@ -33,11 +33,11 @@ func Test_CreateAvailableCombinations(testFramework *testing.T) {
 				availableSeeds: mockSeeds[0:1],
 			},
 			want: []Combination{
-				{numberOfSeeds: 1, score: 15, minimumYield: 0, maximumYield: 1, seeds: []Seed{{"Western Fodlan Seeds", 1, 9}}},
-				{numberOfSeeds: 2, score: 31, minimumYield: 1, maximumYield: 2, seeds: []Seed{{"Western Fodlan Seeds", 1, 9}, {"Western Fodlan Seeds", 1, 9}}},
-				{numberOfSeeds: 3, score: 47, minimumYield: 2, maximumYield: 3, seeds: []Seed{{"Western Fodlan Seeds", 1, 9}, {"Western Fodlan Seeds", 1, 9}, {"Western Fodlan Seeds", 1, 9}}},
-				{numberOfSeeds: 4, score: 63, minimumYield: 3, maximumYield: 4, seeds: []Seed{{"Western Fodlan Seeds", 1, 9}, {"Western Fodlan Seeds", 1, 9}, {"Western Fodlan Seeds", 1, 9}, {"Western Fodlan Seeds", 1, 9}}},
-				{numberOfSeeds: 5, score: 19, minimumYield: 0, maximumYield: 1, seeds: []Seed{{"Western Fodlan Seeds", 1, 9}, {"Western Fodlan Seeds", 1, 9}, {"Western Fodlan Seeds", 1, 9}, {"Western Fodlan Seeds", 1, 9}, {"Western Fodlan Seeds", 1, 9}}},
+				{numberOfSeeds: 1, score: 15, minimumYield: 0, maximumYield: 1, seeds: []seedWithAmount{{Seed{"Western Fodlan Seeds", 1, 9}, 1}}},
+				{numberOfSeeds: 2, score: 31, minimumYield: 1, maximumYield: 2, seeds: []seedWithAmount{{Seed{"Western Fodlan Seeds", 1, 9}, 2}}},
+				{numberOfSeeds: 3, score: 47, minimumYield: 2, maximumYield: 3, seeds: []seedWithAmount{{Seed{"Western Fodlan Seeds", 1, 9}, 3}}},
+				{numberOfSeeds: 4, score: 63, minimumYield: 3, maximumYield: 4, seeds: []seedWithAmount{{Seed{"Western Fodlan Seeds", 1, 9}, 4}}},
+				{numberOfSeeds: 5, score: 19, minimumYield: 0, maximumYield: 1, seeds: []seedWithAmount{{Seed{"Western Fodlan Seeds", 1, 9}, 5}}},
 			},
 		},
 	}

@@ -1,30 +1,28 @@
 package main
 
 import (
-	"FE3H-greehouse-combinations/FE3H_greenhouse_combinations"
-	"encoding/csv"
-	"fmt"
+	"FE3H-greehouse-combinations/fe3h_greenhouse_combinations"
 	"log"
 	"os"
 )
 
 func main() {
-	file, err := os.Open("seeds.csv")
-	if err != nil {
-		log.Fatal(err)
-	}
-	reader := csv.NewReader(file)
-	entries, err := reader.ReadAll()
+	availableSeeds, err := fe3h_greenhouse_combinations.GetDefaultAvailableSeeds()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	availableSeeds, err := FE3H_greenhouse_combinations.CreateAvailableSeeds(entries)
+	availableCombinations := fe3h_greenhouse_combinations.CreateAvailableCombinations(availableSeeds)
+
+	file, err := os.Create("combinations.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	availableCombinations := FE3H_greenhouse_combinations.CreateAvailableCombinations(availableSeeds)
+	fe3h_greenhouse_combinations.ToCSV(availableCombinations, file)
 
-	fmt.Println(len(availableCombinations))
+	err = file.Close()
+	if err != nil {
+		log.Fatal(err)
+	}
 }

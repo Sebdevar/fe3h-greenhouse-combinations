@@ -1,7 +1,9 @@
-package FE3H_greenhouse_combinations
+package fe3h_greenhouse_combinations
 
 import (
+	"encoding/csv"
 	"log"
+	"os"
 	"strconv"
 )
 
@@ -33,4 +35,17 @@ func CreateAvailableSeeds(data [][]string) (availableSeeds []Seed, err error) {
 		availableSeeds = append(availableSeeds, seed)
 	}
 	return
+}
+
+func GetDefaultAvailableSeeds() (availableSeeds []Seed, err error) {
+	file, err := os.Open("fe3h_greenhouse_combinations/seeds.csv")
+	if err != nil {
+		log.Fatal(err)
+	}
+	reader := csv.NewReader(file)
+	entries, err := reader.ReadAll()
+	if err != nil {
+		log.Fatal(err)
+	}
+	return CreateAvailableSeeds(entries)
 }

@@ -1,4 +1,4 @@
-package FE3H_greenhouse_combinations
+package fe3h_greenhouse_combinations
 
 import (
 	"reflect"
